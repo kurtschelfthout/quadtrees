@@ -1,8 +1,10 @@
-# Quadtree demo in Rust, running in your browser via WebAssembly
+# Quadtree Browser Demo in Rust/WebAssembly
 
 Two example implementations of quadtrees in Rust.
 
-Two demos of applying quadtrees to image representation, running in your browser.
+Two demos of applying quadtrees to image representation, running in your browser:
+
+<https://kurtschelfthout.github.io/quadtrees/>
 
 ## Development notes
 
