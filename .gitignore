@@ -1,6 +1,6 @@
 pkg/
 target/
 .vscode/
-www/node_modules/
-Cargo.lock
+www/
 refresh.ps1
+Cargo.lock
