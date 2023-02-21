@@ -5,6 +5,8 @@ use crate::{
     utils,
 };
 
+/// A region of an image or a 2D plane, described by its top left corner
+/// and its width and height.
 #[derive(Debug, Clone)]
 struct Region {
     x: usize,
@@ -64,6 +66,7 @@ impl RegionQuadTree {
         }
     }
 
+    /// Get the original points in the given image, in the region of this quadtree.
     fn get_original_points(&self, image: &Image) -> Vec<Rgba> {
         let region = self.region();
         let mut points = Vec::with_capacity(region.width * region.height);
@@ -75,6 +78,7 @@ impl RegionQuadTree {
         points
     }
 
+    /// Write the averaged points in the given image, in the region of this quadtree.
     fn get_averaged_points(&self, result: &mut Image) {
         match self {
             RegionQuadTree::Leaf(region, mean) => {
@@ -92,6 +96,7 @@ impl RegionQuadTree {
         }
     }
 
+    /// Get the mean squared error of the region of this quadtree.
     fn get_error(&self, image: &Image) -> f32 {
         match self {
             RegionQuadTree::Leaf(_, mean) => {
@@ -108,6 +113,9 @@ impl RegionQuadTree {
         }
     }
 
+    /// Subdivide the region of this quadtree into 4 smaller regions,
+    /// if the error is above the given threshold and the region is
+    /// greater than the given minimum length.
     fn subdivide(
         &self,
         image: &Image,
@@ -183,6 +191,8 @@ impl RegionQuadTree {
     }
 }
 
+/// Convenience struct to hold a quadtree and an image,
+/// for JS interop.
 #[wasm_bindgen]
 pub struct RegionQuadTreeImage {
     quadtree: RegionQuadTree,

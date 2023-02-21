@@ -2,11 +2,17 @@ use wasm_bindgen::prelude::wasm_bindgen;
 
 use crate::image::{Image, Rgba};
 
+/// A coordinate in the image.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Coordinate {
     x: usize,
     y: usize,
 }
+
+/// A node in the quad tree. Describes the region
+/// it is applicable to by top_left and bottom_right
+/// coordinates, both inclusive.
+/// Describes the color of its region in data.
 #[derive(Debug, Clone)]
 pub struct QuadTreeNode {
     top_left: Coordinate,
@@ -14,6 +20,7 @@ pub struct QuadTreeNode {
     data: Rgba,
 }
 
+/// A complete quad tree is stored in a vector.
 #[derive(Debug, Clone)]
 #[wasm_bindgen]
 pub struct QuadTree {
@@ -29,6 +36,7 @@ impl QuadTreeNode {
         }
     }
 
+    /// A node consisting of a single pixel.
     fn pixel(image: &Image, x: usize, y: usize) -> QuadTreeNode {
         QuadTreeNode {
             top_left: Coordinate { x, y },
@@ -39,6 +47,8 @@ impl QuadTreeNode {
 }
 
 impl QuadTree {
+    /// Given the size of the image, returns the capacity of the vec necessary
+    /// to store the nodes.
     fn get_tree_size(image_size: usize) -> (usize, usize) {
         let mut level_size = 1;
         let mut total_size = 1;
@@ -53,6 +63,8 @@ impl QuadTree {
 /// Public methods, exported to JavaScript.
 #[wasm_bindgen]
 impl QuadTree {
+    /// Create a new complete quad tree from an image. Leaf nodes contain a single
+    /// pixel each.
     pub fn new(image: &Image) -> QuadTree {
         let image_size = image.get_size();
         let (tree_size, last_level_size) = QuadTree::get_tree_size(image_size);
@@ -72,6 +84,7 @@ impl QuadTree {
             }
         }
 
+        // fill the branch nodes back to front.
         for i in (0..tree_size - last_level_size).rev() {
             let chunk: Vec<_> = tree_vec[4 * i + 1..=4 * i + 4]
                 .iter()
@@ -88,6 +101,8 @@ impl QuadTree {
         QuadTree { nodes: tree_vec }
     }
 
+    /// Return a new "pixelated" image, constructed from the regions at the
+    /// given level in the tree.
     pub fn image_at_level(&self, level: u32) -> Image {
         let width = self.nodes[0].bottom_right.x - self.nodes[0].top_left.x + 1;
         let height = self.nodes[0].bottom_right.y - self.nodes[0].top_left.y + 1;
