@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quadtree Demo</title>
+    <style>
+      body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+
+    <canvas id="image-canvas"></canvas>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>
+
+
+<!-- chatgpt says:
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RGB Image Example</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		canvas {
+			display: block;
+			margin: 0 auto;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<script>
+		// Example RGB array
+		const rgbArray = [
+			[255, 0, 0],   // red
+			[0, 255, 0],   // green
+			[0, 0, 255],   // blue
+			[255, 255, 0], // yellow
+			[0, 255, 255], // cyan
+			[255, 0, 255]  // magenta
+		];
+
+		const canvas = document.getElementById('myCanvas');
+		const ctx = canvas.getContext('2d');
+
+		// Set the canvas size
+		canvas.width = 300;
+		canvas.height = 200;
+
+		// Draw the image
+		for (let i = 0; i < rgbArray.length; i++) {
+			const color = `rgb(${rgbArray[i][0]}, ${rgbArray[i][1]}, ${rgbArray[i][2]})`;
+			ctx.fillStyle = color;
+			ctx.fillRect(i * 50, 0, 50, 200);
+		}
+	</script>
+</body>
+</html> -->
