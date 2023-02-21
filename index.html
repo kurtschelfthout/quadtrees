@@ -15,20 +15,37 @@
         align-items: center;
         justify-content: center;
       }
+      .flex-container {
+        display: flex;
+        flex-direction: row;
+      }
+      @media (max-width: 800px) {
+        .flex-container {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
     <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
 
-    <canvas id="image-canvas"></canvas>
+    <a href="#region">Region Quadtree</a>
+    <a href="#complete">Complete Quadtree</a>
+
+    <div class=".flex-container">
+        <img id="original"/>
+        <canvas id="image-canvas"></canvas>
+    </div>
+
     <div class="minlengthslidecontainer">
-      <input type="range" min="1" max="100" value="20" class="slider" id="minLength">
+      <input type="range" min="1" max="100" value="20" class="slider" id="minLength" style="display: none;"/>
     </div>
     <div id="minlengthval"></div>
     <div class="errorslidecontainer">
-      <input type="range" min="0" max="5000" value="500" class="slider" id="error">
+      <input type="range" min="0" max="5000" value="500" class="slider" id="error" style="display: none;"/>
     </div>
     <div id="errorval"></div>
+
     <script src="./bootstrap.js"></script>
   </body>
 </html>
