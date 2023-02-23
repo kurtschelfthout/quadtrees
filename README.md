@@ -1,6 +1,8 @@
 # Quadtree Browser Demo in Rust/WebAssembly
 
-Two example implementations of quadtrees in Rust:
+Code for [A Nibble of Quadtrees in Rust](https://getcode.substack.com/p/a-nibble-of-quadtrees-in-rust).
+
+Two example implementations of quadtrees in Rust for my newsletter article.
 
 - [Complete Quadtree](https://github.com/kurtschelfthout/quadtrees/blob/master/src/complete_quad_tree.rs)
 - [Region Quadtree](https://github.com/kurtschelfthout/quadtrees/blob/master/src/region_quad_tree.rs)
